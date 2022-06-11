@@ -1,10 +1,13 @@
+import { Outlet, useSearchParams } from "react-router-dom";
 import { getAsync, selectError, selectInvoices, selectLoading } from "../../redux/features/invoice/invoiceSlice";
 
+import QueryNavLink from "../../components/QueryNavLink";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 import { useEffect } from "react";
 
-export default function Invoices(){
+export default function Invoices() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const invoices = useAppSelector(selectInvoices);
   const loading = useAppSelector(selectLoading);
@@ -25,11 +28,40 @@ export default function Invoices(){
             padding: "1rem",
           }}
         >
+          <input value={searchParams.get("filter") || ""}
+            onChange={(event) => {
+              let filter = event.target.value;
+              if (filter) {
+                setSearchParams({ filter });
+              } else {
+                setSearchParams({});
+              }
+            }}
+          />
           {invoices
+            .filter((invoice) => {
+              const filter = searchParams.get('filter');
+              if (!filter) return true;
+              let name = invoice.name.toLowerCase();
+              return name.startsWith(filter.toLowerCase());
+            })
             .map((invoice) => (
-              <p key={invoice.id}>{invoice.name}</p>
+              <QueryNavLink
+                style={({ isActive }: {isActive: boolean}) => {
+                  return {
+                    display: "block",
+                    margin: "1rem 0",
+                    color: isActive ? "red" : "green"
+                  }
+                }}
+                to={`/invoices/${invoice.id}`}
+                key={invoice.id}
+              >
+                {invoice.name}
+              </QueryNavLink>
             ))}
         </nav>
+        <Outlet />
       </div>}
     </>
   );

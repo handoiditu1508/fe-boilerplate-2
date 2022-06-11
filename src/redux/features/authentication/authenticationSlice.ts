@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
+import authenticationService from "../../../services/authenticationService";
 
 export interface AuthenticationState {
   currentUser: any | null,
@@ -17,18 +18,8 @@ const initialState: AuthenticationState = {
 export const loginAsync = createAsyncThunk(
   "authentication/loginAsync",
   async (loginForm:any) => {
-    // const response = await authenticationService.login(loginForm);
-    // return response;
-    return {
-      token: "token",
-      expirationTime: new Date(),
-      user: {
-        id: Date.now(),
-        userName: "admin1",
-        email: "admin1@gmail.com",
-        name: loginForm.name
-      }
-    }
+    const response = await authenticationService.login(loginForm);
+    return response;
   }
 );
 
@@ -72,7 +63,7 @@ export const authenticationSlice = createSlice({
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
         localStorage.setItem("token", action.payload.token);
-        localStorage.setItem("expirationTime", action.payload.expirationTime.toISOString());
+        localStorage.setItem("expirationTime", action.payload.expirationTime.toString());
         localStorage.setItem("user", JSON.stringify(action.payload.user));
 
         state.currentUser = action.payload.user;
