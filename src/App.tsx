@@ -2,11 +2,10 @@ import './App.css';
 
 import { Link, Outlet } from 'react-router-dom';
 import { loadCurrentUserFromLocal, logout, selectCurrentUser } from './redux/features/authentication/authenticationSlice';
+import { useAppDispatch, useAppSelector } from './hooks';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
-import useAppDispatch from './hooks/useAppDispatch';
-import useAppSelector from './hooks/useAppSelector';
 import { useEffect } from 'react';
 
 function App() {

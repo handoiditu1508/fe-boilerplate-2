@@ -1,12 +1,12 @@
-const style = {
+const style: React.CSSProperties = {
   backgroundColor: "green"
 };
 
-function Footer(){
+function Footer() {
   return (
-  <div style={style}>
-    Footer
-  </div>
+    <div style={style}>
+      Footer
+    </div>
   );
 }
 

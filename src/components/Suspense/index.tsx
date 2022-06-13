@@ -1,7 +1,7 @@
 import React from "react";
 
-interface SuspenseProps {
-  children: React.ReactNode[] | React.ReactNode
+type SuspenseProps = {
+  children: React.ReactNode
 }
 
 export default function Suspense({ children }: SuspenseProps) {

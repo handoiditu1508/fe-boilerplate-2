@@ -2,10 +2,10 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import React from "react";
 import { selectCurrentUser } from "../../redux/features/authentication/authenticationSlice";
-import useAppSelector from "../../hooks/useAppSelector";
+import { useAppSelector } from "../../hooks";
 
-interface RequireAuthProps {
-  children: React.ReactNode[] | React.ReactNode
+type RequireAuthProps = {
+  children: React.ReactNode
 }
 
 export default function RequireAuth({ children }: RequireAuthProps) {

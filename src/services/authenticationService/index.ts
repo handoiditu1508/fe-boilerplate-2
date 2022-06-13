@@ -1,4 +1,11 @@
+import { LoginForm, User } from "../../types";
 import axios, { AxiosInstance } from "axios";
+
+type LoginResponse = {
+  token: string,
+  expirationTime: Date,
+  user: User
+}
 
 class AuthenticationService {
   client: AxiosInstance;
@@ -10,10 +17,10 @@ class AuthenticationService {
     })
   }
 
-  async login(loginForm: any) {
-    var response = await this.client.post("/login", loginForm);
+  async login(loginForm: LoginForm) {
+    var response = await this.client.post<LoginResponse>("/login", loginForm);
     return response.data;
   }
 }
 
-export default new AuthenticationService();
+export default AuthenticationService;

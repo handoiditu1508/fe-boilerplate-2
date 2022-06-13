@@ -1,24 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { Invoice } from "../../../types";
+import InvoiceService from "../../../services/invoiceService";
 import { RootState } from "../../app/store";
-import invoiceService from "../../../services/invoiceService";
 
-export interface InvoiceState {
-  invoices: any[],
+type InvoiceState = {
+  invoices: Invoice[],
   loading: boolean,
-  error: string | null | undefined
+  error: string | undefined
 };
 
 const initialState:InvoiceState = {
   invoices: [],
   loading: false,
-  error: null
+  error: undefined
 };
 
 export const getAsync = createAsyncThunk(
   "invoice/getAsync",
   async () => {
-    var invoices = await invoiceService.getInvoices();
+    const invoiceService = new InvoiceService();
+    let invoices = await invoiceService.getInvoices();
     return invoices;
   }
 );
@@ -26,6 +28,7 @@ export const getAsync = createAsyncThunk(
 export const deleteAsync = createAsyncThunk(
   "invoice/deleteAsync",
   async (id: number) => {
+    const invoiceService = new InvoiceService();
     await invoiceService.deleteInvoice(id);
     return id;
   }
@@ -43,7 +46,7 @@ export const invoiceSlice = createSlice({
       })
       .addCase(getAsync.fulfilled, (state, action) => {
         state.invoices = action.payload;
-        state.error = null;
+        state.error = undefined;
         state.loading = false;
       })
       .addCase(getAsync.rejected, (state, action) => {
@@ -58,7 +61,7 @@ export const invoiceSlice = createSlice({
         if (index !== -1) {
           state.invoices.splice(index, 1);
         }
-        state.error = null;
+        state.error = undefined;
         state.loading = false;
       })
       .addCase(deleteAsync.rejected, (state, action) => {
@@ -73,7 +76,7 @@ export const selectInvoice = (id:number) => (state: RootState) => {
   const index = state.invoice.invoices.findIndex((invoice:any) => invoice.id === id);
     return index !== -1
     ? state.invoice.invoices[index]
-    : null;
+    : undefined;
 }
 export const selectLoading = (state: RootState) => state.invoice.loading;
 export const selectError = (state: RootState) => state.invoice.error;

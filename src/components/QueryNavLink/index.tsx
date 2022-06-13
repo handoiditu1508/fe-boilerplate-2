@@ -2,9 +2,9 @@ import { NavLink, To, useLocation } from "react-router-dom";
 
 import React from "react";
 
-interface QueryNavLinkProps {
+type QueryNavLinkProps = {
   to: To,
-  children: React.ReactNode | React.ReactNode[],
+  children: React.ReactNode,
   style: React.CSSProperties | ((props: {
     isActive: boolean;
   }) => React.CSSProperties)

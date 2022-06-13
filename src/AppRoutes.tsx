@@ -8,7 +8,6 @@ import Profile from "./pages/Profile";
 import React from "react";
 import RequireAuth from "./components/RequireAuth";
 import Suspense from "./components/Suspense";
-import logo from "./assets/logo.svg";
 
 const Expenses = React.lazy(() => import("./pages/Expenses"));
 const Invoices = React.lazy(() => import("./pages/Invoices"));

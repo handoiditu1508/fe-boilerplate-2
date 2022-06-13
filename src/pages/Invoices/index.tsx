@@ -1,9 +1,8 @@
 import { Outlet, useSearchParams } from "react-router-dom";
 import { getAsync, selectError, selectInvoices, selectLoading } from "../../redux/features/invoice/invoiceSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 import QueryNavLink from "../../components/QueryNavLink";
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
 import { useEffect } from "react";
 
 export default function Invoices() {

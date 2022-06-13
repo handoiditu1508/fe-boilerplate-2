@@ -1,32 +1,34 @@
+import { LoginForm, User } from "../../../types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import AuthenticationService from "../../../services/authenticationService";
 import { RootState } from "../../app/store";
-import authenticationService from "../../../services/authenticationService";
 
 export interface AuthenticationState {
-  currentUser: any | null,
+  currentUser: User | undefined,
   loading: boolean,
-  error: string | null | undefined
+  error: string | undefined
 };
 
 const initialState: AuthenticationState = {
-  currentUser: null,
+  currentUser: undefined,
   loading: false,
-  error: null
+  error: undefined
 };
 
 export const loginAsync = createAsyncThunk(
   "authentication/loginAsync",
-  async (loginForm:any) => {
+  async (loginForm: LoginForm) => {
+    const authenticationService = new AuthenticationService();
     const response = await authenticationService.login(loginForm);
     return response;
   }
 );
 
-const getCurrentUser = (): any | null => {
+const getCurrentUser = (): User | undefined => {
   const expirationString = localStorage.getItem("expirationTime");
   if (!expirationString) {
-    return null;
+    return undefined;
   }
 
   const expirationTime = new Date(expirationString);
@@ -34,11 +36,11 @@ const getCurrentUser = (): any | null => {
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
     localStorage.removeItem("user");
-    return null;
+    return undefined;
   }
 
   const userString = localStorage.getItem("user");
-  return userString ? JSON.parse(userString) : null
+  return userString ? JSON.parse(userString) : undefined
 };
 
 export const authenticationSlice = createSlice({
@@ -46,8 +48,8 @@ export const authenticationSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.currentUser = null;
-      
+      state.currentUser = undefined;
+
       localStorage.removeItem("token");
       localStorage.removeItem("expirationTime");
       localStorage.removeItem("user");
@@ -68,7 +70,7 @@ export const authenticationSlice = createSlice({
 
         state.currentUser = action.payload.user;
         state.loading = false;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(loginAsync.rejected, (state, action) => {
         state.loading = false;

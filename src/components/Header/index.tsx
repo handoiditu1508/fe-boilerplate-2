@@ -1,14 +1,14 @@
 import React from "react";
 
-const style = {
+const style: React.CSSProperties = {
   backgroundColor: "green"
 };
 
-function Header(){
+function Header() {
   return (
-  <div style={style}>
-    Header
-  </div>
+    <div style={style}>
+      Header
+    </div>
   );
 }
 

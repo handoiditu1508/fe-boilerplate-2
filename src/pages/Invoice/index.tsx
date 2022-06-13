@@ -1,8 +1,6 @@
 import { deleteAsync, selectInvoice } from "../../redux/features/invoice/invoiceSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
 
 export default function Invoice() {
   let navigate = useNavigate();
@@ -20,7 +18,7 @@ export default function Invoice() {
           <p>
             {invoice.name}: {invoice.number}
           </p>
-          <p>Due Date: {invoice.due}</p>
+          <p>Due Date: {invoice.due.toString()}</p>
           <p>
             <button onClick={() => {
               dispatch(deleteAsync(parseInt(params.invoiceId ?? "0")));

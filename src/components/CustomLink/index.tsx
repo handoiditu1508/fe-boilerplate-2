@@ -2,8 +2,8 @@ import { Link, To, useMatch, useResolvedPath } from "react-router-dom";
 
 import React from "react";
 
-interface CustomLinkProps {
-  children: React.ReactNode[] | React.ReactNode,
+type CustomLinkProps = {
+  children: React.ReactNode,
   to: To
 }
 
