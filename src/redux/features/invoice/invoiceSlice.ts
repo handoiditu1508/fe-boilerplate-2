@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { Invoice } from "../../../types";
-import InvoiceService from "../../../services/invoiceService";
+import InvoiceService from "../../../services/InvoiceService";
 import { RootState } from "../../app/store";
 
 type InvoiceState = {
@@ -10,7 +10,7 @@ type InvoiceState = {
   error: string | undefined
 };
 
-const initialState:InvoiceState = {
+const initialState: InvoiceState = {
   invoices: [],
   loading: false,
   error: undefined
@@ -72,9 +72,9 @@ export const invoiceSlice = createSlice({
 });
 
 export const selectInvoices = (state: RootState) => state.invoice.invoices;
-export const selectInvoice = (id:number) => (state: RootState) => {
-  const index = state.invoice.invoices.findIndex((invoice:any) => invoice.id === id);
-    return index !== -1
+export const selectInvoice = (id: number) => (state: RootState) => {
+  const index = state.invoice.invoices.findIndex((invoice: any) => invoice.id === id);
+  return index !== -1
     ? state.invoice.invoices[index]
     : undefined;
 }

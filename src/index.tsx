@@ -2,7 +2,9 @@ import './index.css';
 
 import AppRoutes from './AppRoutes';
 import { BrowserRouter } from 'react-router-dom';
+import { MainTheme } from './themes';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material';
 import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/app/store';
@@ -13,9 +15,11 @@ const root = createRoot(container);
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <ThemeProvider theme={MainTheme}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>
   // </React.StrictMode>
 );

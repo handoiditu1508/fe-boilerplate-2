@@ -1,7 +1,7 @@
 import { LoginForm, User } from "../../../types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import AuthenticationService from "../../../services/authenticationService";
+import AuthenticationService from "../../../services/AuthenticationService";
 import { RootState } from "../../app/store";
 
 export interface AuthenticationState {
