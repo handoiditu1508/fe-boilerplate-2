@@ -1,13 +1,14 @@
 import axios, { AxiosInstance } from "axios";
 
 import { Invoice } from "../../types";
+import config from "../../config";
 
 class InvoiceService {
   client: AxiosInstance;
 
   constructor() {
     this.client = axios.create({
-      baseURL: "http://localhost:3001/api",
+      baseURL: config.API_BASE_URL,
       timeout: 5000
     })
   }

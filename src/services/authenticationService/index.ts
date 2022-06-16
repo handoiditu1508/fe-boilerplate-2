@@ -1,6 +1,8 @@
 import { LoginForm, User } from "../../types";
 import axios, { AxiosInstance } from "axios";
 
+import config from "../../config";
+
 type LoginResponse = {
   token: string,
   expirationTime: Date,
@@ -12,7 +14,7 @@ class AuthenticationService {
 
   constructor() {
     this.client = axios.create({
-      baseURL: "http://localhost:3001/api",
+      baseURL: config.API_BASE_URL,
       timeout: 5000
     })
   }

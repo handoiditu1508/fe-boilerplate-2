@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthenticationService from "../../../services/AuthenticationService";
 import { RootState } from "../../app/store";
 
-export interface AuthenticationState {
+export type AuthenticationState = {
   currentUser: User | undefined,
   loading: boolean,
   error: string | undefined

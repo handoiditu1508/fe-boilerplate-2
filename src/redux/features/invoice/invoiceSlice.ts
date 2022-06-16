@@ -4,7 +4,7 @@ import { Invoice } from "../../../types";
 import InvoiceService from "../../../services/InvoiceService";
 import { RootState } from "../../app/store";
 
-type InvoiceState = {
+export type InvoiceState = {
   invoices: Invoice[],
   loading: boolean,
   error: string | undefined
