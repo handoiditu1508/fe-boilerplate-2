@@ -14,7 +14,7 @@ type QueryNavLinkProps = {
 export default function QueryNavLink({ to, ...props }: QueryNavLinkProps) {
   const location = useLocation();
 
-  let link = useCombineUrlQuery(to.toString(), location.search);
+  const link = useCombineUrlQuery(to.toString(), location.search);
 
   return <NavLink to={link} {...props} />;
 }

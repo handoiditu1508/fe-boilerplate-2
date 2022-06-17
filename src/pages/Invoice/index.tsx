@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export default function Invoice() {
-  let navigate = useNavigate();
-  let location = useLocation();
-  let params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = useParams();
   const dispatch = useAppDispatch();
   const invoice = useAppSelector(selectInvoice(parseInt(params.invoiceId ?? "0")));
 

@@ -8,8 +8,8 @@ type CustomLinkProps = {
 }
 
 export default function CustomLink({ children, to, ...props }: CustomLinkProps) {
-  let resolved = useResolvedPath(to);
-  let match = useMatch({ path: resolved.pathname, end: true });
+  const resolved = useResolvedPath(to);
+  const match = useMatch({ path: resolved.pathname, end: true });
 
   return (
     <div>

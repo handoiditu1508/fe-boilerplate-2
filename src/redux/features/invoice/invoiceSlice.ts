@@ -20,7 +20,7 @@ export const getAsync = createAsyncThunk(
   "invoice/getAsync",
   async () => {
     const invoiceService = new InvoiceService();
-    let invoices = await invoiceService.getInvoices();
+    const invoices = await invoiceService.getInvoices();
     return invoices;
   }
 );
