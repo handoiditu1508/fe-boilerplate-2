@@ -1,6 +1,6 @@
 import { NavLink, To, useLocation } from "react-router-dom";
-import React, { useMemo } from "react";
 
+import React from "react";
 import { useCombineUrlQuery } from "../../hooks";
 
 type QueryNavLinkProps = {

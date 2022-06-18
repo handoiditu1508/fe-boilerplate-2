@@ -29,9 +29,9 @@ function Header() {
     <Box sx={{ backgroundColor: theme.palette.primary.main }}>
       Header
       <ButtonGroup aria-label="outlined primary button group">
-        <IconButton color="secondary" onClick={handleLightMode} disabled={!preferSystemPaletteMode && paletteMode == "light"}><LightModeIcon /></IconButton>
+        <IconButton color="secondary" onClick={handleLightMode} disabled={!preferSystemPaletteMode && paletteMode === "light"}><LightModeIcon /></IconButton>
         <IconButton color="secondary" onClick={handleSystemMode} disabled={preferSystemPaletteMode}><SettingsSuggestIcon /></IconButton>
-        <IconButton color="secondary" onClick={handleDarkMode} disabled={!preferSystemPaletteMode && paletteMode == "dark"}><DarkModeIcon /></IconButton>
+        <IconButton color="secondary" onClick={handleDarkMode} disabled={!preferSystemPaletteMode && paletteMode === "dark"}><DarkModeIcon /></IconButton>
       </ButtonGroup>
     </Box>
   );

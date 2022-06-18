@@ -32,10 +32,10 @@ export const configSlice = createSlice({
     loadPaletteModeFromLocal: (state) => {
       const localPaletteMode = localStorage.getItem("paletteMode");
       if (localPaletteMode) {
-        if (localPaletteMode == "light") {
+        if (localPaletteMode === "light") {
           state.preferSystemPaletteMode = false;
           state.paletteMode = "light";
-        } else if (localPaletteMode == "dark") {
+        } else if (localPaletteMode === "dark") {
           state.preferSystemPaletteMode = false;
           state.paletteMode = "dark";
         }

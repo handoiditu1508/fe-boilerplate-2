@@ -13,8 +13,10 @@ export default function Invoices() {
   const error = useAppSelector(selectError);
 
   useEffect(() => {
-    dispatch(getAsync());
-  }, [dispatch]);
+    if (invoices.length === 0) {
+      dispatch(getAsync());
+    }
+  }, []);
 
   return (
     <>
@@ -46,7 +48,7 @@ export default function Invoices() {
             })
             .map((invoice) => (
               <QueryNavLink
-                style={({ isActive }: {isActive: boolean}) => {
+                style={({ isActive }: { isActive: boolean }) => {
                   return {
                     display: "block",
                     margin: "1rem 0",

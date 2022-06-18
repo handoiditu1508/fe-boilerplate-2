@@ -5,6 +5,10 @@ import configReducer from '../features/config/configSlice';
 import counterReducer from '../features/counter/counterSlice';
 import invoiceReducer from '../features/invoice/invoiceSlice';
 
+// development environment only
+// const reduxLogger = require("redux-logger");
+// const logger = reduxLogger.createLogger();
+
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -12,6 +16,7 @@ export const store = configureStore({
     invoice: invoiceReducer,
     config: configReducer
   },
+  // middleware: (getDefaultMiddleware)=>getDefaultMiddleware().concat(logger)
 });
 
 export type AppDispatch = typeof store.dispatch;

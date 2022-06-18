@@ -25,24 +25,27 @@ export default function AppRoutes() {
     dispatch(loadCurrentUserFromLocal());
   }, []);
 
-  // Check palette mode in local storage
-  useEffect(() => {
-    dispatch(loadPaletteModeFromLocal());
-  }, []);
-
   // Set palette mode
   const paletteMode = useAppSelector(selectPaletteMode);
   const preferSystemPaletteMode = useAppSelector(selectPreferSystemPaletteMode);
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  if (preferSystemPaletteMode) {
-    if (prefersDarkMode) {
-      if (paletteMode !== "dark") {
-        dispatch(setPaletteMode("dark"));
+  useEffect(()=>{
+    console.log(preferSystemPaletteMode, prefersDarkMode, paletteMode);
+    if (preferSystemPaletteMode) {
+      if (prefersDarkMode) {
+        if (paletteMode !== "dark") {
+          dispatch(setPaletteMode("dark"));
+        }
+      } else if (paletteMode !== "light") {
+        dispatch(setPaletteMode("light"));
       }
-    } else if (paletteMode !== "light") {
-      dispatch(setPaletteMode("light"));
     }
-  }
+  }, [preferSystemPaletteMode, prefersDarkMode, paletteMode]);
+
+  // Check palette mode in local storage
+  useEffect(() => {
+    dispatch(loadPaletteModeFromLocal());
+  }, []);
 
   // Create theme base on palete mode
   const theme = useMemo(() => createMainTheme(paletteMode), [paletteMode]);

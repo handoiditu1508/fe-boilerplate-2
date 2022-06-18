@@ -1,7 +1,7 @@
 import './App.css';
 
 import { Box, ButtonGroup, useTheme } from '@mui/material';
-import { loadCurrentUserFromLocal, logout, selectCurrentUser } from './redux/features/authentication/authenticationSlice';
+import { logout, selectCurrentUser } from './redux/features/authentication/authenticationSlice';
 import { useAppDispatch, useAppSelector } from './hooks';
 
 import Footer from './components/Footer';
@@ -10,7 +10,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import LinkButton from './components/LinkButton';
 import LinkIconButton from './components/LinkIconButton';
 import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function App() {
   const user = useAppSelector(selectCurrentUser);

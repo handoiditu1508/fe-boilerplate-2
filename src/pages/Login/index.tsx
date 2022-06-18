@@ -1,11 +1,10 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { loginAsync, selectCurrentUser, selectError, selectLoading } from "../../redux/features/authentication/authenticationSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 
 export default function Login() {
   const dispatch = useAppDispatch();
-  //const navigate = useNavigate();
   const location = useLocation();
   const redirect = (location.state as any)?.redirect ?? "/";
   const currentUser = useAppSelector(selectCurrentUser);
@@ -15,7 +14,6 @@ export default function Login() {
 
   const handleLogin = () => {
     dispatch(loginAsync({ name }));
-    //navigate("/");
   }
 
   return !currentUser ? (
