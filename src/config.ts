@@ -6,7 +6,7 @@ export type ConfigValues = {
 
 export type Config = { [key in EnvironmentType]: ConfigValues };
 
-const environment: EnvironmentType = "development";
+const environment: EnvironmentType = process.env.NODE_ENV;
 
 const config: Config = {
   development: {
