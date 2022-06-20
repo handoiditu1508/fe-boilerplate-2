@@ -1,29 +1,22 @@
-import axios, { AxiosInstance } from "axios";
-
+import { HttpClient } from "../../common";
 import { Invoice } from "../../types";
-import config from "../../config";
 
 class InvoiceService {
-  client: AxiosInstance;
+  client: HttpClient;
 
   constructor() {
-    this.client = axios.create({
-      baseURL: config.API_BASE_URL,
-      timeout: 5000
-    })
+    this.client = new HttpClient();
   }
 
-  async getInvoices() {
-    const response = await this.client.get<Invoice[]>("/invoices");
-    return response.data;
+  async getInvoices(): Promise<Invoice[]> {
+    return await this.client.get<Invoice[]>("/invoices");
   }
 
-  async getInvoice(id: number) {
-    const response = await this.client.get<Invoice>(`/invoices/${id}`);
-    return response.data;
+  async getInvoice(id: number): Promise<Invoice> {
+    return await this.client.get<Invoice>(`/invoices/${id}`);
   }
 
-  async deleteInvoice(id: number) {
+  async deleteInvoice(id: number): Promise<void> {
     await this.client.delete(`/invoices/${id}`);
   }
 }

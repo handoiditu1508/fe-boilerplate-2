@@ -1,7 +1,6 @@
 import { LoginForm, User } from "../../types";
-import axios, { AxiosInstance } from "axios";
 
-import config from "../../config";
+import { HttpClient } from "../../common";
 
 type LoginResponse = {
   token: string,
@@ -10,18 +9,14 @@ type LoginResponse = {
 }
 
 class AuthenticationService {
-  client: AxiosInstance;
+  client: HttpClient;
 
   constructor() {
-    this.client = axios.create({
-      baseURL: config.API_BASE_URL,
-      timeout: 5000
-    })
+    this.client = new HttpClient();
   }
 
-  async login(loginForm: LoginForm) {
-    var response = await this.client.post<LoginResponse>("/login", loginForm);
-    return response.data;
+  async login(loginForm: LoginForm): Promise<LoginResponse> {
+    return await this.client.post<LoginResponse>("/login", loginForm);
   }
 }
 
