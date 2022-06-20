@@ -1,7 +1,7 @@
 import './App.css';
 
 import { Box, ButtonGroup, useTheme } from '@mui/material';
-import { logout, selectCurrentUser } from './redux/features/authentication/authenticationSlice';
+import { loadCurrentUserFromLocal, logout, selectCurrentUser } from './redux/features/authentication/authenticationSlice';
 import { useAppDispatch, useAppSelector } from './hooks';
 
 import Footer from './components/Footer';
@@ -10,14 +10,21 @@ import HomeIcon from '@mui/icons-material/Home';
 import LinkButton from './components/LinkButton';
 import LinkIconButton from './components/LinkIconButton';
 import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function App() {
   const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
+  const theme = useTheme();
+
   const handleLogout = () => {
     dispatch(logout());
   };
-  const theme = useTheme();
+
+  // Check login user
+  useEffect(() => {
+    dispatch(loadCurrentUserFromLocal());
+  }, []);
 
   return (
     <>
@@ -26,7 +33,6 @@ function App() {
         <Outlet />
         <nav
           style={{
-            borderBottom: "solid 1px",
             paddingBottom: "1rem",
           }}
         >
