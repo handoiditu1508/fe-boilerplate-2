@@ -41,20 +41,32 @@ export class UrlHelper {
   }
 
   /**
-   * Append a dictionary of key string and value string[] to an url query string.
-   * @param dictionary A dictionary of string[]. Example:
+   * Combine a dictionary of key string and value string or string[] to an url query string.
+   * @param queryObject A dictionary of string or string[]. Example:
+   * {
+   *  category: "technology",
+   *  price: "200"
+   * }
+   * or
    * {
    *  category: ["technology", "furniture"],
    *  price: [200]
    * }
-   * @returns An url query string. Example: "category=technology&category=furniture&price=200"
+   * @returns An url query string. Example: "category=technology&price=200"
    */
-  static toQueryFromStringsDictionary(dictionary: StringsDictionary): string {
+  static toQuery(queryDictionary: StringDictionary | StringsDictionary) {
     let query = "";
 
-    for (const key in dictionary) {
-      for (const value in dictionary[key]) {
-        query += `${key}=${value}&`
+    if(this.instanceOfStringDictionary(queryDictionary))
+    {
+      for (const key in queryDictionary) {
+        query += `${key}=${queryDictionary[key]}&`;
+      }
+    } else{
+      for (const key in queryDictionary) {
+        for (const value in queryDictionary[key]) {
+          query += `${key}=${value}&`
+        }
       }
     }
 
@@ -66,26 +78,15 @@ export class UrlHelper {
   }
 
   /**
-   * Combine a dictionary of key string and value string to an url query string.
-   * @param queryObject A dictionary of string. Example:
-   * {
-   *  category: "technology",
-   *  price: "200"
-   * }
-   * @returns An url query string. Example: "category=technology&price=200"
+   * Check and dictionary is instance of StringDictionary or StringsDictionary.
+   * @param dictionary Object instance of either StringDictionary or StringsDictionary.
+   * @returns dictionary is StringDictionary.
    */
-  static toQueryFromStringDictionary(queryDictionary: StringDictionary) {
-    let query = "";
-  
-    for (const key in queryDictionary) {
-      query += `${key}=${queryDictionary[key]}&`;
+  static instanceOfStringDictionary(dictionary: StringDictionary | StringsDictionary): dictionary is StringDictionary {
+    for (const key in dictionary) {
+      return typeof dictionary[key] === "string"
     }
-  
-    if (query) {
-      query = query.substring(0, query.length - 1);
-    }
-  
-    return query;
+    return true;
   }
 
   /**

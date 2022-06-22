@@ -20,7 +20,7 @@ export function useCombineUrlQuery(path: string, ...queries: string[]): string {
     }
   }, {});
 
-  const finalQuery = UrlHelper.toQueryFromStringDictionary(finalQueryObject);
+  const finalQuery = UrlHelper.toQuery(finalQueryObject);
 
   return `${basePath}?${finalQuery}`;
 }

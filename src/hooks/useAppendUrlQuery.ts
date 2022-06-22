@@ -26,7 +26,7 @@ export function useAppendUrlQuery(path: string, ...queries: string[]): string {
     return paramsDict;
   }, {});
 
-  const finalQuery = UrlHelper.toQueryFromStringsDictionary(finalParamsDict);
+  const finalQuery = UrlHelper.toQuery(finalParamsDict);
 
   return `${basePath}?${finalQuery}`;
 }
